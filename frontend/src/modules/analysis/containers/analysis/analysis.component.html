@@ -1,0 +1,130 @@
+<sb-layout-dashboard
+    ><sb-dashboard-head title="Phân tích số liệu" [hideBreadcrumbs]="false"></sb-dashboard-head
+    ><sb-card
+        ><div class="card-body">
+            <form class="form mat-form-field-outline-custom" [formGroup]="filterFormValid">
+                <div class="row">
+                    <div class="col-md-2" *ngIf="displayTinh">
+                        <div class="form-group">
+                            <label>Tỉnh / Thành phố</label>
+                            <mat-form-field appearance="fill">
+                                <mat-select
+                                    placeholder="Chọn"
+                                    formControlName="tinh"
+                                    (selectionChange)="filterByTinh()"
+                                >
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option
+                                        *ngFor="let item of listProvince"
+                                        [value]="item?.id_tinh"
+                                        >{{ item?.ten_tinh }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-2" *ngIf="displayHuyen">
+                        <div class="form-group">
+                            <label>Quận / Huyện</label>
+                            <mat-form-field appearance="fill">
+                                <mat-select
+                                    placeholder="Chọn"
+                                    formControlName="huyen"
+                                    (selectionChange)="filterByHuyen()"
+                                >
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option
+                                        *ngFor="let item of listQuan"
+                                        [value]="item?.id_huyen"
+                                        >{{ item?.ten_huyen }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-2" *ngIf="displayXa">
+                        <div class="form-group">
+                            <label>Xã / phường</label>
+                            <mat-form-field appearance="fill">
+                                <mat-select
+                                    placeholder="Chọn"
+                                    formControlName="xa"
+                                    (selectionChange)="filterByXa()"
+                                >
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option *ngFor="let item of listXa" [value]="item?.id_xa"
+                                        >{{ item?.ten_xa }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-2" *ngIf="displayXom">
+                        <div class="form-group">
+                            <label>Thôn / Bản / TDP</label>
+                            <mat-form-field appearance="fill">
+                                <mat-select
+                                    placeholder="Chọn"
+                                    formControlName="xom"
+                                    (selectionChange)="filterByXom()"
+                                >
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option *ngFor="let item of listXom" [value]="item?.id_xom"
+                                        >{{ item?.ten_xom }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button mat-raised-button color="primary" class="btn">Phân tích</button>
+                    </div>
+                </div>
+            </form>
+        </div></sb-card
+    >
+    <p style="text-align: center; font-size: large">
+        Tiến độ điều tra
+        <span *ngIf="displayTinh">Toàn quốc</span>
+        <span *ngIf="(tentinh !== '')"> tỉnh {{ tentinh }}</span>
+        <span *ngIf="(tenhuyen !== '')">, huyện {{ tenhuyen }}</span>
+        <span *ngIf="(tenxa !== '')">, xã {{ tenxa }}</span>
+        <span *ngIf="(tenxom !== '')">, xóm {{ tenxom }}</span>
+    </p>
+    <div class="row">
+        <div class="col-lg-6">
+            <sb-card
+                ><div class="card-header">
+                    <fa-icon class="mr-1" [icon]="['fas', 'chart-pie']"></fa-icon>Tỉ lệ nam nữ
+                </div>
+                <div class="card-body"><canvas #myPieChart></canvas></div>
+                <div class="card-footer small text-muted">
+                    Tổng số dân: {{ this.total }}
+                </div></sb-card
+            >
+        </div>
+        <div class="col-lg-6">
+            <sb-card
+                ><div class="card-header">
+                    <fa-icon class="mr-1" [icon]="['fas', 'chart-pie']"></fa-icon>Tỉ lệ dân cư theo
+                    độ tuối
+                </div>
+                <div class="card-body"><canvas #myPieChart2></canvas></div>
+                <div class="card-footer small text-muted">
+                    Tổng số dân: {{ this.total }}
+                </div></sb-card
+            >
+        </div>
+    </div>
+    <sb-card
+        ><div class="card-header">
+            <fa-icon class="mr-1" [icon]="['fas', 'chart-bar']"></fa-icon>Phân bố dân cư theo trình
+            độ văn hóa
+        </div>
+        <div class="card-body"><canvas #myBarChart></canvas></div>
+        <div class="card-footer small text-muted">Tổng số dân: {{ this.total }}</div></sb-card
+    >
+</sb-layout-dashboard>

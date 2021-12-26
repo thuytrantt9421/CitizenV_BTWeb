@@ -1,0 +1,27 @@
+@import 'styles/variables.scss';
+
+thead > tr > th {
+    cursor: pointer;
+}
+::ng-deep {
+    #tableContractId .handsontable {
+        tr:first-child {
+            th:first-child .changeType {
+                display: none !important;
+            }
+            th:last-child .changeType {
+                display: none !important;
+            }
+        }
+        thead {
+            th {
+                background-color: lightblue;
+            }
+        }
+        tbody {
+            td {
+                background-color: #fff;
+            }
+        }
+    }
+}

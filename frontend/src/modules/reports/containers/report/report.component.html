@@ -1,0 +1,20 @@
+<sb-layout-dashboard
+    ><sb-dashboard-head title="Quản lý tài khoản" [hideBreadcrumbs]="false"></sb-dashboard-head>
+    <sb-card
+        ><div class="card-header">
+            <fa-icon class="mr-1" [icon]="['fas', 'table']"></fa-icon>Danh sách dân cư
+            <button mat-raised-button color="primary" class="btn back">
+                Thêm mới
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="overflow: hidden; width: 100%; height: 300px; position: relative">
+                        <div id="tableContractId"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </sb-card>
+</sb-layout-dashboard>

@@ -1,0 +1,123 @@
+<sb-layout-dashboard
+    ><sb-dashboard-head title="Theo dõi tiến độ" [hideBreadcrumbs]="false"></sb-dashboard-head>
+    <sb-card>
+        <div class="card-body">
+            <!-- <sb-ng-bootstrap-books></sb-ng-bootstrap-books> -->
+            <form class="form mat-form-field-outline-custom" [formGroup]="filterFormValid">
+                <div class="row">
+                    <div class="col-md-4" *ngIf="displayTinh">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Tỉnh / Thành phố</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <mat-select
+                                    placeholder="Chọn"
+                                    formControlName="tinh"
+                                    (selectionChange)="filterByTinh()"
+                                >
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option
+                                        *ngFor="let item of listProvince"
+                                        [value]="item?.id_tinh"
+                                        >{{ item?.ten_tinh }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="displayHuyen">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Quận / Huyện</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <mat-select
+                                    placeholder="Chọn"
+                                    formControlName="huyen"
+                                    (selectionChange)="filterByHuyen()"
+                                >
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option
+                                        *ngFor="let item of listQuan"
+                                        [value]="item?.id_huyen"
+                                        >{{ item?.ten_huyen }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="displayXa">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Xã / phường</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <mat-select
+                                    placeholder="Chọn"
+                                    formControlName="xa"
+                                    (selectionChange)="filterByXa()"
+                                >
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option *ngFor="let item of listXa" [value]="item?.id_xa"
+                                        >{{ item?.ten_xa }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button mat-raised-button color="primary" class="btn" *ngIf="displayXa">Xem tiến độ</button>
+                    </div>
+                </div>
+            </form>
+            <br /><br />
+            <p style="text-align: center;font-size: large;">
+                Tiến độ điều tra
+                <span *ngIf="displayTinh">Toàn quốc</span>
+                <span *ngIf="(tentinh !== '')"> tỉnh {{ tentinh }}</span>
+                <span *ngIf="(tenhuyen !== '')">, huyện {{ tenhuyen }}</span>
+                <span *ngIf="(tenxa !== '')">, xã {{ tenxa }}</span>
+            </p>
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div
+                            style="overflow: hidden; width: 100%; height: 300px; position: relative"
+                        >
+                            <div id="tableContractId"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right pr-10">
+                        <span> Tổng số: {{ dataSource?.length }} bản ghi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </sb-card>
+    <!-- <div class="row">
+        <div class="col-ld-6">
+            <sb-card>
+                <div class="card-header">
+                    <fa-icon class="mr-1" [icon]="['fas', 'chart-pie']"></fa-icon>Tiến độ điều tra
+                </div>
+                <div class="card-body">
+                    <circle-progress
+                        [percent]="85"
+                        [radius]="100"
+                        [outerStrokeWidth]="16"
+                        [innerStrokeWidth]="8"
+                        [outerStrokeColor]="'#78C000'"
+                        [innerStrokeColor]="'#C7E596'"
+                        [animation]="true"
+                        [animationDuration]="300"
+                    ></circle-progress>
+                </div>
+            </sb-card>
+        </div>
+        <div class="col-ld-6">
+            <sb-card>
+                <div class="card-header">
+                    <fa-icon class="mr-1" [icon]="['fas', 'chart-pie']"></fa-icon>Tiến độ Nhập liệu
+                </div>
+                <div class="card-body"></div>
+            </sb-card>
+        </div>
+    </div> -->
+</sb-layout-dashboard>

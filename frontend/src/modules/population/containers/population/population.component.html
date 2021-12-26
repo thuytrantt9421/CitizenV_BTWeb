@@ -1,0 +1,17 @@
+<sb-layout-dashboard
+    ><sb-dashboard-head title="Quản lý dân cư" [hideBreadcrumbs]="false"></sb-dashboard-head>
+    <sb-card
+        ><div class="card-header">
+            <fa-icon class="mr-1" [icon]="['fas', 'table']"></fa-icon>Danh sách dân cư
+            <button mat-raised-button color="primary" class="btn back" (click)="addPerson()">
+                Thêm mới
+            </button>
+            <!-- <button mat-raised-button color="primary" class="btn back" (click)="addPerson()">
+                Hoàn thành
+            </button> -->
+        </div>
+        <div class="card-body">
+            <population-content></population-content>
+        </div>
+    </sb-card>
+</sb-layout-dashboard>

@@ -1,0 +1,80 @@
+<div class="card card-custom">
+    <!-- Header -->
+
+    <div class="card-header">
+        <h3 class="card-title text-dark">Khai báo đơn vị và cấp mới tài khoản</h3>
+        <div class="card-toolbar"></div>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+        <form class="form mat-form-field-outline-custom" [formGroup]="filterFormValid">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Đơn vị hành chính</label>
+                    <mat-form-field appearance="fill">
+                        <input matInput placeholder="" type="text" autocomplete="off" formControlName="donvi"/>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <label>Mã đơn vị</label>
+                    <mat-form-field appearance="fill">
+                        <input matInput placeholder="" type="text" autocomplete="off" formControlName="tai_khoan"/>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <label>Mật khẩu</label>
+                    <mat-form-field appearance="fill">
+                        <input matInput placeholder="" type="text" autocomplete="off" formControlName="mat_khau"/>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <label>Họ tên</label>
+                    <mat-form-field appearance="fill">
+                        <input matInput placeholder="" type="text" autocomplete="off" formControlName="ho_ten"/>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <label>Số điện thoại</label>
+                    <mat-form-field appearance="fill">
+                        <input matInput placeholder="" type="text" autocomplete="off" formControlName="sdt"/>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <label>Email</label>
+                    <mat-form-field appearance="fill">
+                        <input matInput placeholder="" type="text" autocomplete="off" formControlName="email"/>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <label>Địa chỉ</label>
+                    <mat-form-field appearance="fill">
+                        <input matInput placeholder="" type="text" autocomplete="off" formControlName="dia_chi"/>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="form-group col-md-12">
+                    <input type="checkbox" /><label>Cấp phép khảo sát dân số</label>
+                </div> -->
+                <!-- <div class="col-md-12">
+                    <div class="custom-control custom-checkbox">
+                        <input
+                            class="custom-control-input"
+                            id="surveyPermissionCheck"
+                            type="checkbox"
+                            (click)="capQuyen()"
+                        /><label class="custom-control-label" for="surveyPermissionCheck"
+                            >Cấp phép khảo sát dân số</label
+                        >
+                    </div>
+                </div> -->
+            </div>
+        </form>
+    </div>
+    <!-- Footer -->
+    <div class="card-footer">
+        <div class="d-flex justify-content-end">
+            <button mat-raised-button (click)="closeDialog()" class="mr-2">Hủy</button>
+            <button mat-raised-button color="primary" class="btn" (click)="addUser()">Thêm mới</button>
+        </div>
+    </div>
+</div>

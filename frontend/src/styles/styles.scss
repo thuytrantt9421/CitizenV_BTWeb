@@ -1,0 +1,137 @@
+// Import Custom Variables
+@import 'variables.scss';
+
+// Import Bootstrap
+@import 'bootstrap/scss/bootstrap.scss';
+
+// Import Custom SCSS
+@import 'global.scss';
+
+// Layout
+@import 'layout/authentication.scss';
+@import 'layout/dashboard-default.scss';
+@import 'layout/dashboard-fixed.scss';
+@import 'layout/error.scss';
+
+// Navigation
+@import 'navigation/nav.scss';
+@import 'navigation/topnav.scss';
+@import 'navigation/sidenav/sidenav.scss';
+@import 'navigation/sidenav/sidenav-dark.scss';
+@import 'navigation/sidenav/sidenav-light.scss';
+@import 'angular/material/components/button.scss';
+@import 'angular/material/angular-material';
+@import 'angular/material/include';
+@import '~handsontable/dist/handsontable.full.css';
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// custom style material
+.mat-form-field-outline-custom {
+    .mat-form-field {
+        width: 100%;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-flex {
+        border-radius: 5px !important;
+        padding: 0px 10px 2px 10px !important;
+    }
+
+    // form
+
+    // disabled input
+    .mat-select-disabled,
+    .mat-input-element.disabled,
+    .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+        background: #f5f5f5 !important;
+    }
+
+    .mat-form-field.disabled,
+    .mat-form-field-disabled {
+        .mat-form-field-flex {
+            background: #f5f5f5 !important;
+        }
+    }
+
+    .mat-input-element:disabled,
+    .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+        background: #f5f5f5 !important;
+    }
+    // end disabled input
+
+    .mat-form-field-appearance-fill .mat-form-field-flex {
+        background: #fff;
+        border: 1px solid #ccc !important;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-infix {
+        padding: 6px 0px 4px 0px !important;
+        margin-top: 0px !important;
+        line-height: 20px !important;
+        border: none !important;
+    }
+    .mat-form-field-appearance-fill .mat-select-arrow-wrapper {
+        transform: none !important;
+    }
+    .mat-form-field-suffix {
+        top: 4px !important;
+        right: -11px !important;
+    }
+    .mat-form-field-suffix .mat-icon-button {
+        height: 1.5em !important;
+    }
+    .mat-form-field-ripple {
+        left: 3px !important;
+        width: calc(100% - 6px) !important;
+    }
+    .mat-form-field-subscript-wrapper {
+        font-size: 90% !important;
+    }
+
+    .mat-input-element:disabled,
+    .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+        color: rgba(0, 0, 0, 0.87);
+    }
+
+    .mat-radio-button.mat-radio-disabled .mat-radio-label-content {
+        color: rgba(0, 0, 0, 0.87);
+    }
+}
+
+.mat-form-field-outline-custom.no-valid {
+    .mat-form-field-wrapper {
+        padding: 0;
+    }
+    .mat-form-field-underline {
+        display: none;
+    }
+}
+
+.mat-form-field-underline {
+    display: none;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.button {
+    background-color: #343a40;
+}
+
+.back {
+    float: right;
+}
+.card-body-scroll {
+    display: block;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.mat-dialog-container {
+    margin-top: 30px;
+}

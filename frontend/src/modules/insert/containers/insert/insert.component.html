@@ -1,0 +1,189 @@
+<sb-layout-dashboard
+    ><sb-dashboard-head title="Nhập liệu" [hideBreadcrumbs]="false"></sb-dashboard-head
+    ><sb-card
+        ><div class="card-header">
+            <fa-icon class="mr-1" [icon]="['fas', 'keyboard']"></fa-icon>Nhập thông tin dân số
+            <button mat-raised-button color="primary" class="btn back" routerLink="/app/population" *ngIf="display">
+                Quay lại
+            </button>
+        </div>
+        <div class="card-body">
+            <form
+                class="form mat-form-field-outline-custom form-custom-lable-inline"
+                autocomplete="off"
+                [formGroup]="addPersonForm"
+            >
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Tỉnh / Thành phố</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <mat-select placeholder="Chọn" formControlName="tinh" (selectionChange)="initForm()">
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option
+                                        *ngFor="let item of listProvince"
+                                        [value]="item?.id_tinh"
+                                        >{{ item?.ten_tinh }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Huyện / Quận</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <mat-select placeholder="Chọn" formControlName="huyen" (selectionChange)="initForm()">
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option
+                                        *ngFor="let item of listQuan"
+                                        [value]="item?.id_huyen"
+                                        >{{ item?.ten_huyen }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Xã / Phường</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <mat-select placeholder="Chọn" formControlName="xa" (selectionChange)="initForm()">
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option
+                                        *ngFor="let item of listXa"
+                                        [value]="item?.id_xa"
+                                        >{{ item?.ten_xa }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Thôn/bản/TDP</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <mat-select placeholder="Chọn" formControlName="xom">
+                                    <mat-option>--Chọn--</mat-option>
+                                    <mat-option
+                                        *ngFor="let item of listXom"
+                                        [value]="item?.id_xom"
+                                        >{{ item?.ten_xom }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="controls.xom.errors && controls.xom.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">CCCD / CMND</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <input matInput type="text" formControlName="cccd"/>
+                                <mat-error *ngIf="controls.cccd.errors && controls.cccd.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Họ và tên</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <input matInput type="text" formControlName="name"/>
+                                <mat-error *ngIf="controls.name.errors && controls.name.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Ngày tháng năm sinh</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <input matInput [matDatepicker]="picker" formControlName="dob"/>
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="picker"
+                                ></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error *ngIf="controls.dob.errors && controls.dob.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Giới tính</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <mat-select placeholder="Chọn" formControlName="gender">
+                                    <mat-option
+                                        *ngFor="let item of gender"
+                                        [value]="item"
+                                        >{{ item }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="controls.gender.errors && controls.gender.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Quê quán</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <input matInput type="text" formControlName="birthplace"/>
+                                <mat-error *ngIf="controls.birthplace.errors && controls.birthplace.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Địa chỉ thường trú</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <input matInput type="text" formControlName="permanentAddress"/>
+                                <mat-error *ngIf="controls.permanentAddress.errors && controls.permanentAddress.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Địa chỉ tạm trú</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <input matInput type="text" formControlName="tempAddress"/>
+                                <mat-error *ngIf="controls.tempAddress.errors && controls.tempAddress.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Tôn giáo</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <input matInput type="text" formControlName="region"/>
+                                <mat-error *ngIf="controls.region.errors && controls.region.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Trình độ văn hóa</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <input matInput type="text" formControlName="eduLevel"/>
+                                <mat-error *ngIf="controls.eduLevel.errors && controls.eduLevel.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-6 pr-0">Nghề nghiệp</label>
+                            <mat-form-field appearance="fill" class="col-md-6">
+                                <input matInput type="text" formControlName="profession"/>
+                                <mat-error *ngIf="controls.profession.errors && controls.profession.errors['required']">Bắt buộc</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button mat-raised-button color="primary" class="btn" (click)="addPerson()">Thêm mới</button>
+                    </div>
+                </div>
+            </form>
+        </div></sb-card
+    ></sb-layout-dashboard
+>

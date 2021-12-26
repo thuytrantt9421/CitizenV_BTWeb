@@ -1,0 +1,103 @@
+<div>
+    <div>
+        <form class="form mat-form-field-outline-custom" [formGroup]="filterFormValid">
+            <div class="row">
+                <div class="col-md-2" *ngIf="displayTinh">
+                    <div class="form-group">
+                        <label>Tỉnh / Thành phố</label>
+                        <mat-form-field appearance="fill">
+                            <mat-select placeholder="Chọn" formControlName="tinh" (selectionChange)="filterByTinh()">
+                                <mat-option>--Chọn--</mat-option>
+                                <mat-option
+                                        *ngFor="let item of listProvince"
+                                        [value]="item?.id_tinh"
+                                        >{{ item?.ten_tinh }}
+                                    </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-2" *ngIf="displayHuyen">
+                    <div class="form-group">
+                        <label>Quận / Huyện</label>
+                        <mat-form-field appearance="fill">
+                            <mat-select placeholder="Chọn" formControlName="huyen" (selectionChange)="filterByHuyen()">
+                                <mat-option>--Chọn--</mat-option>
+                                <mat-option
+                                    *ngFor="let item of listQuan"
+                                    [value]="item?.id_huyen"
+                                    >{{ item?.ten_huyen }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-2" *ngIf="displayXa">
+                    <div class="form-group">
+                        <label>Xã / phường</label>
+                        <mat-form-field appearance="fill">
+                            <mat-select placeholder="Chọn" formControlName="xa" (selectionChange)="filterByXa()">
+                                <mat-option>--Chọn--</mat-option>
+                                <mat-option
+                                    *ngFor="let item of listXa"
+                                    [value]="item?.id_xa"
+                                    >{{ item?.ten_xa }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-2" *ngIf="displayXom">
+                    <div class="form-group">
+                        <label>Thôn / Bản / TDP</label>
+                        <mat-form-field appearance="fill">
+                            <mat-select placeholder="Chọn" formControlName="xom" (selectionChange)="filterByXom">
+                                <mat-option>--Chọn--</mat-option>
+                                <mat-option
+                                    *ngFor="let item of listXom"
+                                    [value]="item?.id_xom"
+                                    >{{ item?.ten_xom }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>CCCD / CMND</label>
+                        <mat-form-field appearance="fill">
+                            <input matInput type="text" autocomplete="off" ktInputTextTrim formControlName="cccd"/>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Họ tên</label>
+                        <mat-form-field appearance="fill">
+                            <input matInput type="text" autocomplete="off" ktInputTextTrim formControlName="name"/>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button mat-raised-button color="primary" class="btn" (click)="filterTable()">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+        <br /><br />
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="overflow: hidden; width: 100%; height: 300px; position: relative">
+                        <div id="tableContractId"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 text-right pr-10">
+                    <span> Tổng số: {{ dataSource?.length }} bản ghi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

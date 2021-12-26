@@ -1,0 +1,228 @@
+Lấy project trên Git về
+Mở folder chứa project ra, chạy cmd lệnh như sau: go run main.go
+Server sẽ chạy ở localhost cổng 10000
+Thêm DB vào local, và chạy DB ở cổng 3306 (Xampp)
+
+Đăng nhập: http://localhost:10000/api/login
+Phần của request Body chứa: 
+	user_name
+	password
+Nếu thành công, sẽ trả về:
+	message: "success"
+Ngoài ra, khi password rỗng hoặc tài khoản rỗng:
+	message: "tai khoan hoac mat khau khong hop le"
+Khi sai pass:
+	message: "password wrong"
+
+##################################################################################################
+
+Đăng xuất: http://localhost:10000/api/logout
+
+Nếu thành công, sẽ trả về:
+	message: "success"
+
+##################################################################################################
+
+Thêm người dân: http://localhost:10000/api/them_dan
+Phần của request Body chứa: 
+	cccd
+	hoten
+	gioitinh
+	ngaysinh
+	quequan
+	diachi_thuongtru
+	diachi_tamtru
+	tongiao
+	trinhdo
+	nghenghiep
+	id_xom
+Nếu thành công, sẽ trả về:
+	message: "success"
+Xóm chưa có trong DB:
+	message: "Xom khong ton tai"
+Trùng CCCD của ai đó:
+	message: "Người dùng đã tồn tại"
+
+##################################################################################################
+
+Xóa người dân: http://localhost:10000/api/xoanguoidan
+Phần của request Body chứa: 
+	cccd
+Nếu thành công, sẽ trả về:
+	message: "success"
+Người dân không có trong DB:
+	message: "Người dân không tồn tại"
+
+##################################################################################################
+
+Sửa người dân: http://localhost:10000/api/suanguoidan
+Phần của request Body chứa: 
+	cccd
+	hoten
+	gioitinh
+	ngaysinh
+	quequan
+	diachi_thuongtru
+	diachi_tamtru
+	tongiao
+	trinhdo
+	nghenghiep
+	id_xom
+Các kết quả có thể trả về:
+	message: "success"
+hoặc	message: "Người dân không tồn tại"
+hoặc 	message: "Xom khong ton tai"
+
+##################################################################################################
+
+Khai báo tỉnh/huyện/xã/xóm: http://localhost:10000/api/khaibao
+Phần của request Body chứa: 
+	id        (2 số là khai báo tỉnh, 4 số là huyện, ...)
+	ten
+Các kết quả có thể trả về:
+	message: "success"
+hoặc 	message: "Sai cú pháp"       	  (Khi tỉnh có ID không phải là 2/4/6/8 số) 
+
+hoặc	message: "Tỉnh đã tồn tại"        (Khi khai báo tỉnh)
+hoặc 	message: "Huyện đã tồn tại"       (Khi khai báo huyện)
+hoặc 	message: "Tỉnh không tồn tại"     (Khi khai báo huyện, mà tỉnh tương ứng chưa được khai báo)
+hoặc 	message: "Xã đã tồn tại"          (Khi khai báo xã)
+hoặc 	message: "Huyện không tồn tại"    (Khi khai báo xã, mà huyện tương ứng chưa được khai báo) 
+hoặc 	message: "Xóm đã tồn tại"    	  (Khi khai báo xóm)
+hoặc 	message: "Xã không tồn tại"       (Khi khai báo xóm, mà xã tương ứng chưa được khai báo) 
+
+##################################################################################################
+
+Cấp tài khoản cho A2/A3/B1/B2: http://localhost:10000/api/captaikhoan
+Phần của request Body chứa: 
+	tai_khoan    (2 số là khai báo A2, 4 số là A3, ...)
+	mat_khau
+	ho_ten
+	sdt
+	email
+	dia_chi
+Các kết quả có thể trả về:
+	message: "success"
+hoặc	message: "Tài khoản không thể đặt như vậy" (Khi tk không phải là 2/4/6/8 số) 
+hoặc	message: "Tài khoản đã tồn tại"        
+hoặc 	message: "Không thể cấp tài khoản cho Tỉnh không tồn tại"       
+hoặc 	message: "Không thể cấp tài khoản cho Huyện không tồn tại"     
+hoặc 	message: "Không thể cấp tài khoản cho Xã không tồn tại"         
+hoặc 	message: "HKhông thể cấp tài khoản cho Xóm không tồn tại"    
+   
+##################################################################################################
+
+Liệt kê tỉnh/huyện/xã/xóm: http://localhost:10000/api/ds
+Phần của request Body chứa: 
+	id	(rỗng là liệt kê all tỉnh, 2 số là liệt kê huyện của 1 tỉnh, 4 số là ...)
+Các kết quả có thể trả về:
+	ds: dữ liệu            (Nhập sai ID tỉnh/huyện/xã/xóm thì sẽ trả về rỗng)
+	message: "success"
+	
+hoặc	message: "Sai ID" (Khi ID không phải là 2/4/6/8 số) 
+
+##################################################################################################
+
+Liệt kê dân theo all/tỉnh/huyện/xã/xóm: http://localhost:10000/api/getAllDan
+Phần của request Body chứa: 
+	id	(rỗng là liệt kê all, 2 số là liệt kê dân của 1 tỉnh, 4 số là ...)
+	cccd	(Có thể rỗng)
+	hoten	(Có thể rỗng)
+Các kết quả có thể trả về:
+	ds_nguoidan: dữ liệu            (Nhập sai ID tỉnh/huyện/xã/xóm thì sẽ trả về rỗng)
+	message:     "success"
+	
+hoặc	message: "Sai ID" (Khi ID không phải là 0/2/4/6/8 số) 
+
+##################################################################################################
+
+Cấp quyền khai báo all/tỉnh/huyện/xã/xóm: http://localhost:10000/api/capquyenkhaibao
+Phần của request Body chứa: 
+	id	(2 số là cấp quyền 1 tỉnh, 4 số là ...)
+	thoi_diem_bat_dau
+	thoi_diem_ket_thuc
+
+Các kết quả có thể trả về:
+	message:     "success"
+hoặc	message:     "Sai ID" 
+hoặc	message:     "Sai cú pháp"
+
+##################################################################################################
+
+Báo cáo hoàn thành: http://localhost:10000/api/baocaohoanthanh
+Phần của request Body chứa: 
+	id	(Gồm 8 số - là id của 1 xóm)
+Các kết quả có thể trả về:
+	message:     "success"
+	
+hoặc	message: "Sai ID" (Khi ID không phải là 8 số) 
+hoặc	message: "Xóm không tồn tại"
+
+Sau khi 1 xóm được báo cáo hoàn thành, các xã có all xóm hoàn thành sẽ tự update thành "Hoàn thành",
+các huyện có all xã hoàn thành cũng tự update, và tỉnh cũng vậy.
+
+##################################################################################################
+
+Thống kê: http://localhost:10000/api/thongke
+Phần của request Body chứa: 
+	id	(rỗng là Thống kê all tỉnh, 2 số là Thống kê huyện của 1 tỉnh, 4 số là ...)
+Các kết quả có thể trả về:
+	message     :     "success"
+	nam         :      ...
+	nu          :      ...
+	thathoc     :      ...
+	tieuhoc     :      ...
+	thcs        :      ...
+	thpt        :      ...
+	cotongiao   :      ...
+	khongtongiao:      ...
+	duoi18	    :      ...
+	tu18den60   :      ...
+	tren60	    :      ...
+
+
+##################################################################################################
+
+Lấy thông tin người dùng: http://localhost:10000/api/thongtinnguoidung
+Phần của request Body chứa: 
+	tai_khoan
+Trả về:
+	ho_ten
+	dia_chi
+	email
+	sdt
+	message     :     "success"
+Những kết quả trả về khác của message là lỗi.
+
+##################################################################################################
+
+Lấy thông tin tất cả người dùng: http://localhost:10000/api/thongtinallnguoidung
+Là 1 Api GET, nên không có Body
+Trả về:
+	ds_nguoidung:     Một mảng chứa tất cả thông tin người dùng
+	message     :     "success"
+Những kết quả trả về khác của message là lỗi.
+
+##################################################################################################
+
+Lấy thông tin người dùng cấp dưới: http://localhost:10000/api/thongtinnguoidungcapduoi
+Phần của request Body chứa: 
+	tai_khoan	  (Nếu tk là admin thì trả về tất cả các tk còn lại, nếu tk là mã tỉnh huyện xã thì trả về các tk cấp dưới của tỉnh huyện xã đó)
+Trả về:
+	ds_nguoidung:	  Một mảng chứa tất cả thông tin người dùng, có thể rỗng
+	message     :     "success"
+Những kết quả trả về khác của message là lỗi.
+
+
+
+##################################################################################################
+
+Cấp quyền (MỚI): http://localhost:10000/api/capquyenkhaibaotk
+Phần của request Body chứa: 
+	tai_khoan	  
+	quyen 	    :     "YES" hoặc "NO"
+Trả về:
+	message     :     "success"
+Những kết quả trả về khác của message là lỗi.
+
+
