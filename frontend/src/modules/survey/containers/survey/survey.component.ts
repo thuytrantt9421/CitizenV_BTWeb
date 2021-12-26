@@ -9,4 +9,9 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 export class SurveyComponent implements OnInit {
     constructor() {}
     ngOnInit() {}
+    display: boolean = true;
+    print() {
+        this.display = false;
+        window.print();
+    }
 }
